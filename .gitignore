@@ -1,0 +1,5 @@
+terraform.tfvars
+.vscode
+.code
+.idea
+.terraform
