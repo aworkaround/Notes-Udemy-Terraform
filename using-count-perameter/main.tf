@@ -10,11 +10,18 @@ provider "docker" {}
 resource "docker_image" "nodered_image" {
   name = "nodered/node-red:latest"
 }
+resource "random_string" "random" {
+  count = 3
+  length = 4
+  special = false
+  upper = false
+}
 resource "docker_container" "nodered_container" {
-  name = "nodered"
+  count = 3
+  name = "nodered-${random_string.random[count.index].result}"
   image = docker_image.nodered_image.latest
   ports {
     internal = 1880
-    external = 1880
+    external = 1880 + count.index
   }
 }
