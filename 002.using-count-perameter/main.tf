@@ -25,3 +25,9 @@ resource "docker_container" "nodered_container" {
     external = 1880 + count.index
   }
 }
+
+# output using splat(*)
+output "container-name" {
+  value = docker_container.nodered_container[*].name
+  description = "The Name of the containers created."
+}
